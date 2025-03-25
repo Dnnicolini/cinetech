@@ -7,6 +7,11 @@ use app\core\Router;
 
 $router = new Router();
 
+$router->get('/', function() {
+    header("Location: /filmes");
+    exit;
+});
+
 $router->get('/filmes', [FilmeController::class, 'index']);
 $router->get('/filmes/create', [FilmeController::class, 'create']);
 $router->post('/filmes/store', [FilmeController::class, 'store']);

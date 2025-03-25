@@ -13,7 +13,12 @@ class Router {
         self::$routes['POST'][$uri] = $action;
     }
 
+    public static function delete($uri, $action) {
+        self::$routes['DELETE'][$uri] = $action;
+    }
+
     public static function dispatch($uri) {
+        
         $method = $_SERVER['REQUEST_METHOD'];
 
         foreach (self::$routes[$method] as $route => $action) {
