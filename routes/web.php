@@ -1,7 +1,9 @@
 <?php
 
-include '../core/Router.php';
-include '../app/controllers/FilmeController.php';
+use app\controllers\GeneroController;
+use app\controllers\FilmeController;
+use app\core\Router;
+
 
 $router = new Router();
 

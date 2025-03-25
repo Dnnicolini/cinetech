@@ -1,0 +1,15 @@
+{
+    "name": "dnnicolini/cinetech",
+    "autoload": {
+        "psr-4": {
+            "app\\": "app/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Dnnicolini",
+            "email": "danienicolini@hotmail.com"
+        }
+    ],
+    "require": {}
+}

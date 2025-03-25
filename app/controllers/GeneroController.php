@@ -1,7 +1,8 @@
 <?php
 
-include "../app/models/Genero.php";
+namespace app\controllers;
 
+use app\models\Genero;
 
 class GeneroController {
     public function index() {

@@ -17,7 +17,7 @@
             <?php foreach ($filmes as $filme): ?>
                 <tr>
                     <td><?= htmlspecialchars($filme['titulo']); ?></td>
-                    <td><?= htmlspecialchars($filme['genero']); ?></td>
+                    <td><?= htmlspecialchars($filme['generos']); ?></td>
                     <td><?= $filme['duracao'] . " min"; ?></td>
                     <td>
                         <a href="/filmes/show/<?= $filme['id']; ?>" class="btn btn-info btn-sm">Ver</a>

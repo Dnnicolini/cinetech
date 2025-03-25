@@ -1,5 +1,9 @@
 <?php
 
+namespace app\config;
+
+use PDO;
+
 class Database {
     private static $host = "172.28.240.1"; 
     private static $dbname = "filmes_db";
@@ -20,6 +24,6 @@ class Database {
     }
 
     public static function disconnect() {
-        self::$conn = null;  // PDO se desconecta automaticamente, mas é bom ter esse método
+        self::$conn = null;  
     }
 }

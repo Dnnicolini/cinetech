@@ -1,8 +1,11 @@
 <?php 
 
-include "../config/database.php";
+namespace App\Models;
 
+use app\config\Database;
+use PDO;
 class Genero {
+
     private $db;
 
     public function __construct() {
@@ -14,8 +17,7 @@ class Genero {
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$nome, $descricao]);
         $filme_id = $this->db->lastInsertId();
-        
-      
+    
     }
 
     public function listar() {
@@ -24,7 +26,7 @@ class Genero {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function buscarPorId($id) {
+    public function buscarPorId(int $id) {
         $sql = "SELECT * FROM generos WHERE id = ?";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$id]);
@@ -38,9 +40,10 @@ class Genero {
 
     }
 
-    public function excluir($id) {
+    public function excluir(int $id) {
         $sql = "DELETE FROM generos WHERE id = ?";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$id]);
     }
+
 }

@@ -1,65 +1,79 @@
 <?php
 
-include "../app/models/Filme.php";
+namespace app\controllers;
 
+use app\models\Filme;
+use app\models\Genero;
 
 
 class FilmeController {
+
+    public $generos;
+
+    public function __construct() {
+
+        $generoModel = new Genero();
+        $this->generos = $generoModel->listar();
+    }
     public function index() {
         $filmeModel = new Filme();
         $filmes = $filmeModel->listar();
+
         include "../app/views/filmes/index.php";
     }
 
     public function create() {
+        $generos = $this->generos;
         include "../app/views/filmes/create.php";
     }
 
     public function store() {
+
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
-            $titulo = $_POST["titulo"];
-            $sinopse = $_POST["sinopse"];
-            $genero = $_POST["genero"];
-            $trailer = $_POST["trailer"];
-            $dataLancamento = $_POST["data_lancamento"];
-            $duracao = $_POST["duracao"];
-            
-            // Upload da Capa
+
             $capa = "";
             if (!empty($_FILES["capa"]["name"])) {
                 $uploadDir = "../public/uploads/";
                 $capa = $uploadDir . basename($_FILES["capa"]["name"]);
                 move_uploaded_file($_FILES["capa"]["tmp_name"], $capa);
             }
+
+            $dados = [
+                "titulo" => $_POST["titulo"],
+                "sinopse" => $_POST["sinopse"],
+                "capa" => $capa,
+                "trailer" => $_POST["trailer"],
+                "data_lancamento" => $_POST["data_lancamento"],
+                "duracao" => $_POST["duracao"],
+                "generos" => $_POST["generos"]
+            ];
             
             $filmeModel = new Filme();
-            $filmeModel->cadastrar($titulo, $sinopse, $genero, $capa, $trailer, $dataLancamento, $duracao);
+            $filmeModel->cadastrar($dados);
             header("Location: /filmes");
         }
     }
 
-    public function show($id) {
+    public function show(int $id) {
         $filmeModel = new Filme();
         $filme = $filmeModel->buscarPorId($id);
+        $generos = $this->generos;
         include "../app/views/filmes/show.php";
     }
 
-    public function edit($id) {
+    public function edit(int $id) {
         $filmeModel = new Filme();
         $filme = $filmeModel->buscarPorId($id);
+        $generos = $this->generos;
+        $filmesGeneros = $filmeModel->listarGenerosId($id);
+
+ 
         include "../app/views/filmes/edit.php";
     }
 
-    public function update($id) {
+    public function update(int $id) {
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
-            $titulo = $_POST["titulo"];
-            $sinopse = $_POST["sinopse"];
-            $genero = $_POST["genero"];
-            $trailer = $_POST["trailer"];
-            $dataLancamento = $_POST["data_lancamento"];
-            $duracao = $_POST["duracao"];
-            
-            // Upload da Capa
+
             $capa = "";
             if (!empty($_FILES["capa"]["name"])) {
                 $uploadDir = "../public/uploads/";
@@ -68,12 +82,12 @@ class FilmeController {
             }
             
             $filmeModel = new Filme();
-            $filmeModel->atualizar($id, $titulo, $sinopse, $genero, $capa, $trailer, $dataLancamento, $duracao);
+            $filmeModel->atualizar($_POST, $id);
             header("Location: /filmes");
         }
     }
 
-    public function destroy($id) {
+    public function destroy(int $id) {
         $filmeModel = new Filme();
         $filmeModel->excluir($id);
         header("Location: /filmes");

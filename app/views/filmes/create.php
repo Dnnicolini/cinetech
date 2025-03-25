@@ -15,7 +15,12 @@
 
         <div class="mb-3">
             <label for="genero" class="form-label">Gênero</label>
-            <input type="text" class="form-control" name="genero" required>
+            <select class="form-select" name="generos[]" id="generos" multiple required>
+                <option value="">Selecione um gênero</option>
+                <?php foreach ($generos as $genero): ?>
+                <option value="<?php echo $genero['id']; ?>"><?php echo $genero['nome']; ?></option>
+                <?php endforeach; ?>
+            </select>
         </div>
 
         <div class="mb-3">
