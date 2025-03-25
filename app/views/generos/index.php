@@ -13,13 +13,13 @@
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($filmes as $filme): ?>
+            <?php foreach ($generos as $genero): ?>
                 <tr>
-                    <td><?= htmlspecialchars($filme['nome']); ?></td>
-                    <td><?= htmlspecialchars($filme['descricao']); ?></td>
+                    <td><?= htmlspecialchars($genero['nome']); ?></td>
+                    <td><?= htmlspecialchars($genero['descricao']); ?></td>
                     <td>
-                        <a href="/generos/show/<?= $filme['id']; ?>" class="btn btn-info btn-sm">Ver</a>
-                        <a href="/generos/edit/<?= $filme['id']; ?>" class="btn btn-info btn-sm">Editar</a>
+                        <a href="/generos/show/<?= $genero['id']; ?>" class="btn btn-info btn-sm">Ver</a>
+                        <a href="/generos/edit/<?= $genero['id']; ?>" class="btn btn-info btn-sm">Editar</a>
                     </td>
                 </tr>
             <?php endforeach; ?>

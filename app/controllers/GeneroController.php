@@ -7,7 +7,7 @@ use app\models\Genero;
 class GeneroController {
     public function index() {
         $GeneroModel = new Genero();
-        $Generos = $GeneroModel->listar();
+        $generos = $GeneroModel->listar();
         include "../app/views/generos/index.php";
     }
 
@@ -27,13 +27,13 @@ class GeneroController {
 
     public function show($id) {
         $GeneroModel = new Genero();
-        $Genero = $GeneroModel->buscarPorId($id);
+        $genero = $GeneroModel->buscarPorId($id);
         include "../app/views/generos/show.php";
     }
 
     public function edit($id) {
         $GeneroModel = new Genero();
-        $Genero = $GeneroModel->buscarPorId($id);
+        $genero = $GeneroModel->buscarPorId($id);
         include "../app/views/generos/edit.php";
     }
 

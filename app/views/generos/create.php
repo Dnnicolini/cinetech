@@ -1,7 +1,7 @@
 <?php require_once '../app/views/includes/header.php'; ?>
 
 <div class="container mt-4">
-    <h2>Cadastrar Novo Genêro</h2>
+    <h2>Cadastrar Novo Gênero</h2>
     <form action="/generos/store" method="POST" enctype="multipart/form-data">
         <div class="mb-3">
             <label for="nome" class="form-label">Nome</label>

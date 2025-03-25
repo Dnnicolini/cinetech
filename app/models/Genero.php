@@ -13,7 +13,7 @@ class Genero {
     }
 
     public function cadastrar($nome, $descricao) {
-        $sql = "INSERT INTO generos (nome, descricao) VALUES (?, ?,?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO generos (nome, descricao) VALUES (?, ?)";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$nome, $descricao]);
         $filme_id = $this->db->lastInsertId();
