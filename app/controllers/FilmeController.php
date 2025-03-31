@@ -33,9 +33,9 @@ class FilmeController {
 
             $capa = "";
             if (!empty($_FILES["capa"]["name"])) {
-                $uploadDir = "/uploads/";
-                $capa = $uploadDir . basename($_FILES["capa"]["name"]);
-                move_uploaded_file($_FILES["capa"]["tmp_name"], $capa);
+                $uploadDir = "../public/uploads/";
+                $capa = '/uploads/' . basename($_FILES["capa"]["name"]);
+                move_uploaded_file($_FILES["capa"]["tmp_name"], $uploadDir . basename($_FILES["capa"]["name"]));
             }
 
             $dados = [
