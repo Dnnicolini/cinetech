@@ -1,17 +1,19 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
-
     RewriteBase /
 
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteRule ^(.*)$ public/index.php?url=$1 [QSA,L]
-
-    <FilesMatch "\.(jpg|jpeg|png|gif)$">
-        Header set Cache-Control "max-age=31536000, public"
-    </FilesMatch>
-
-    RewriteRule ^(app|config) - [F,L]
-
-    Options -Indexes
+    RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
 </IfModule>
+
+<IfModule mod_headers.c>
+    Header set Cache-Control "max-age=31536000, public"
+</IfModule>
+
+<FilesMatch "\.(jpg|png|gif|webp)$">
+    Require all granted
+</FilesMatch>
+
+
+Options -Indexes

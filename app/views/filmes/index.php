@@ -4,29 +4,23 @@
     <h2>Lista de Filmes</h2>
     <a href="/filmes/create" class="btn btn-primary mb-3">Cadastrar Novo Filme</a>
 
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Título</th>
-                <th>Gênero</th>
-                <th>Duração</th>
-                <th>Ações</th>
-            </tr>
-        </thead>
-        <tbody>
             <?php foreach ($filmes as $filme): ?>
-                <tr>
-                    <td><?= htmlspecialchars($filme['titulo']); ?></td>
-                    <td><?= htmlspecialchars($filme['generos']); ?></td>
-                    <td><?= $filme['duracao'] . " min"; ?></td>
-                    <td>
-                        <a href="/filmes/show/<?= $filme['id']; ?>" class="btn btn-info btn-sm">Ver</a>
-                        <a href="/filmes/edit/<?= $filme['id']; ?>" class="btn btn-info btn-sm">Editar</a>
-                    </td>
-                </tr>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <img src="<?= htmlspecialchars($filme['capa']) ?>" class="card-img-top" alt="<?= htmlspecialchars($filme['titulo']) ?>">
+                        <div class="card-body">
+                            <h5 class="card-title"><?= htmlspecialchars($filme['titulo']) ?></h5>
+                            <p class="card-text"><strong>Gêneros:</strong> <?= htmlspecialchars($filme['generos']) ?></p>
+                            <p class="card-text text-truncate"> <?= htmlspecialchars($filme['sinopse']) ?> </p>
+                        </div>
+                        <div class="card-footer text-center">
+                            <small class="text-muted">Lançamento: <?= date('d/m/Y', strtotime($filme['data_lancamento'])) ?> | Duração: <?= htmlspecialchars($filme['duracao']) ?> min</small>
+                            <br>
+                            <a href="<?= htmlspecialchars($filme['trailer']) ?>" class="btn btn-primary mt-2" target="_blank">Assistir Trailer</a>
+                        </div>
+                    </div>
+                </div>
             <?php endforeach; ?>
-        </tbody>
-    </table>
 </div>
 
 <?php require_once '../app/views/includes/footer.php'; ?>
