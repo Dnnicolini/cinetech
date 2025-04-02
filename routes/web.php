@@ -14,10 +14,10 @@ $router->get('/', function() {
 });
 
 $router->get('/auth/login', [AuthController::class, 'loginView']);
-$router->get('/auth/register', [AuthController::class, 'create']);
+// $router->get('/auth/register', [AuthController::class, 'create']);
 $router->post('/logout', [AuthController::class, 'logout']);
 $router->post('/login', [AuthController::class, 'login']);
-$router->post('/register', [AuthController::class, 'store']);
+// $router->post('/register', [AuthController::class, 'store']);
 
 $router->get('/filmes', [FilmeController::class, 'index']);
 $router->get('/filmes/create', [FilmeController::class, 'create']);
