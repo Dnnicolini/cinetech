@@ -18,23 +18,25 @@ class Router {
     }
 
     public static function dispatch($uri) {
-        
         $method = $_SERVER['REQUEST_METHOD'];
-
+    
+        $uri = parse_url($uri, PHP_URL_PATH);
+    
         foreach (self::$routes[$method] as $route => $action) {
             if (preg_match("#^$route$#", $uri, $matches)) {
                 array_shift($matches); 
-
+    
                 $controllerName = $action[0]; 
                 $methodName = $action[1]; 
-
+    
                 $controller = new $controllerName(); 
                 call_user_func_array([$controller, $methodName], $matches);
                 return;
             }
         }
-
+    
         echo $method . ' ' . $uri;
     }
+    
 }
 

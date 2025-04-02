@@ -1,6 +1,6 @@
 <?php 
 
-namespace App\Models;
+namespace app\Models;
 
 use app\config\Database;
 use PDO;
@@ -33,12 +33,12 @@ class Genero {
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function atualizar($nome, $descricao) {
+    public function atualizar($id, $nome, $descricao) {
         $sql = "UPDATE generos SET nome = ?, descricao = ? WHERE id = ?";
         $stmt = $this->db->prepare($sql);
-        $stmt->execute([$nome, $descricao]);
-
+        $stmt->execute([$nome, $descricao, $id]); 
     }
+    
 
     public function excluir(int $id) {
         $sql = "DELETE FROM generos WHERE id = ?";

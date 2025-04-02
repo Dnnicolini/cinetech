@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\Genero;
+use app\config\Helpers;
 
 class GeneroController {
     public function index() {
@@ -12,10 +13,12 @@ class GeneroController {
     }
 
     public function create() {
+        Helpers::requireAuth();
         include "../app/views/generos/create.php";
     }
 
     public function store() {
+        Helpers::requireAuth();
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $nome = $_POST["nome"];
             $descricao = $_POST["descricao"];            
@@ -32,23 +35,26 @@ class GeneroController {
     }
 
     public function edit($id) {
+        Helpers::requireAuth();
         $GeneroModel = new Genero();
         $genero = $GeneroModel->buscarPorId($id);
         include "../app/views/generos/edit.php";
     }
 
     public function update($id) {
+        Helpers::requireAuth();
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $nome = $_POST["nome"];
             $descricao = $_POST["descricao"];
             
             $GeneroModel = new Genero();
-            $GeneroModel->atualizar($nome, $descricao);
+            $GeneroModel->atualizar($id, $nome, $descricao);
             header("Location: /generos");
+            exit;
         }
     }
-
     public function destroy($id) {
+        Helpers::requireAuth();
         $GeneroModel = new Genero();
         $GeneroModel->excluir($id);
         header("Location: /generos");

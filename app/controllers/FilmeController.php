@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\Filme;
 use app\models\Genero;
+use app\config\Helpers;
 
 
 class FilmeController {
@@ -11,23 +12,32 @@ class FilmeController {
     public $generos;
 
     public function __construct() {
-
         $generoModel = new Genero();
         $this->generos = $generoModel->listar();
     }
     public function index() {
+        
         $filmeModel = new Filme();
-        $filmes = $filmeModel->listar();
+        
+        $titulo = $_GET['titulo'] ?? null;
+        $genero = $_GET['genero'] ?? null;
+    
+        $filmes = $filmeModel->listar($titulo, $genero);
+        $generos = $this->generos;
 
         include "../app/views/filmes/index.php";
     }
+    
 
     public function create() {
+        Helpers::requireAuth(); 
         $generos = $this->generos;
         include "../app/views/filmes/create.php";
     }
 
     public function store() {
+
+        Helpers::requireAuth(); 
 
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
@@ -62,6 +72,8 @@ class FilmeController {
     }
 
     public function edit(int $id) {
+        Helpers::requireAuth(); 
+
         $filmeModel = new Filme();
         $filme = $filmeModel->buscarPorId($id);
         $generos = $this->generos;
@@ -72,6 +84,9 @@ class FilmeController {
     }
 
     public function update(int $id) {
+
+        Helpers::requireAuth(); 
+
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             $capa = "";
@@ -88,6 +103,7 @@ class FilmeController {
     }
 
     public function destroy(int $id) {
+        Helpers::requireAuth();
         $filmeModel = new Filme();
         $filmeModel->excluir($id);
         header("Location: /filmes");

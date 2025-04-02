@@ -5,7 +5,7 @@ namespace app\config;
 use PDO;
 
 class Database {
-    private static $host = "172.28.240.1"; 
+    private static $host = "192.168.100.18"; 
     private static $dbname = "filmes_db";
     private static $user = "user";
     private static $pass = "password";
